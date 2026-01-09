@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 
+import java.util.List;
 
 import static me.Pro2021CA.dupePlusPlus.blacklist.blacklisteditems;
 
@@ -29,12 +30,14 @@ public class dupe implements CommandExecutor {
             ItemMeta oldmeta = tool.getItemMeta();
             ItemMeta meta = tool.getItemMeta();
             meta.setItemName("blacklisted item");
-            meta.customName(Component.text("blacklisted item"));
             tool.setItemMeta(meta);
             Short durability = tool.getDurability();
             tool.setDurability(tool.getType().getMaxDurability());
+            blacklisteditems = (List<ItemStack>) DupePlusPlus.plugin.getConfig().getList("blacklisted items");
             if (blacklisteditems.contains(tool)){
                 tool.setItemMeta(oldmeta);
+                tool.setAmount(amount);
+                tool.setDurability(durability);
                 p.sendMessage("You can't dupe this item");
                 return true;
             }

@@ -32,21 +32,28 @@ public class blacklist implements CommandExecutor {
                 }
                 ItemStack itemStack = p.getInventory().getItem(p.getInventory().getHeldItemSlot());
                 itemStack.setDurability(itemStack.getType().getMaxDurability());
+                Integer amount = itemStack.getAmount();
+                Short old = itemStack.getDurability();
                 ItemMeta oldmeta = itemStack.getItemMeta();
                 ItemMeta meta = itemStack.getItemMeta();
                 meta.setItemName("blacklisted item");
-                meta.customName(Component.text("blacklisted item"));
                 itemStack.setItemMeta(meta);
                 itemStack.setAmount(1);
                 if (blacklisteditems.contains(itemStack)){
+                    itemStack.setItemMeta(oldmeta);
+                    itemStack.setDurability(old);
+                    itemStack.setAmount(amount);
                     p.sendMessage("This item is already blacklisted");
                     return true;
                 }
                 blacklisteditems.add(itemStack);
+                itemStack.setAmount(amount);
                 p.sendMessage("Added your held item");
                 itemStack.setItemMeta(oldmeta);
+                itemStack.setDurability(old);
+                DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
             }else{
-                    p.sendMessage("usage: /blacklist <list/add>");
+                p.sendMessage("usage: /blacklist <list/add>");
             }
         }
         return true;

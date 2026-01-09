@@ -11,6 +11,7 @@ import static me.Pro2021CA.dupePlusPlus.blacklist.blacklisteditems;
 
 public final class DupePlusPlus extends JavaPlugin {
     public static Plugin plugin;
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -18,16 +19,14 @@ public final class DupePlusPlus extends JavaPlugin {
         saveDefaultConfig();
         if (getConfig().getList("blacklisted items") != null) {
             blacklisteditems = (List<ItemStack>) getConfig().getList("blacklisted items");
-        }else{
+        } else {
             blacklisteditems = new ArrayList<ItemStack>();
+            // Plugin startup logic
+            getCommand("blacklist").setExecutor(new blacklist());
+            getCommand("dupe").setExecutor(new dupe());
+
         }
-        System.out.println(plugin.getConfig().getList("blacklisted items"));
-        // Plugin startup logic
-        getCommand("blacklist").setExecutor(new blacklist());
-        getCommand("dupe").setExecutor(new dupe());
-
     }
-
     @Override
     public void onDisable() {
         // Plugin shutdown logic
