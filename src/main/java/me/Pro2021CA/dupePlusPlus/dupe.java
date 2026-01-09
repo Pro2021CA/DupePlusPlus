@@ -104,6 +104,10 @@ public class dupe implements CommandExecutor {
                     }
                 }
             }
+            if (dupeamount > maxdupe.MaxDupe){
+                p.sendMessage("You can only dupe " + maxdupe.MaxDupe + " times");
+                return true;
+            }
             for (int i = 0; i < dupeamount; i++) {
                 p.give(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
             }
