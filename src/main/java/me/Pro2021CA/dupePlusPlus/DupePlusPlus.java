@@ -26,6 +26,7 @@ public final class DupePlusPlus extends JavaPlugin {
         }
         getCommand("blacklist").setExecutor(new blacklist());
         getCommand("dupe").setExecutor(new dupe());
+        getCommand("nondupeable").setExecutor(new persistendata());
     }
     @Override
     public void onDisable() {

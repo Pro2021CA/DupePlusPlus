@@ -8,3 +8,6 @@ commands:
     permission: dupeplusplus.blacklist
   dupe:
     usage: /<command> <amount>
+  nondupeable:
+    usage: /<command>
+    permission: dupeplusplus.nondupe

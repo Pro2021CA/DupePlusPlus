@@ -3,6 +3,7 @@ package me.Pro2021CA.dupePlusPlus;
 import io.papermc.paper.datacomponent.item.BundleContents;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,6 +37,9 @@ public class dupe implements CommandExecutor {
             if (blacklisteditems.contains(tool)){
                 p.sendMessage("You can't dupe this item");
                 return true;
+            }else if(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))) {
+                p.sendMessage("You can't dupe this item!");
+                return true;
             }
             if(p.getInventory().getItemInMainHand().getItemMeta() instanceof BlockStateMeta){
                 BlockStateMeta im = (BlockStateMeta)p.getInventory().getItemInMainHand().getItemMeta();
@@ -48,6 +52,30 @@ public class dupe implements CommandExecutor {
                                 item.setLore(shulkerBox.getInventory().getItem(i).getLore());
                                 if (blacklisteditems.contains(item)) {
                                     p.sendMessage("you can't dupe this item");
+                                    return true;
+                                }else if(item.getType().toString().contains("BUNDLE")){
+                                    BundleMeta bundlemetastuff = (BundleMeta) shulkerBox.getInventory().getItem(i).getItemMeta();
+                                    List<ItemStack> bundles = bundlemetastuff.getItems();
+                                    for (int e = 0; e < bundles.size(); e++){
+                                        if (bundles.get(e).getType() != Material.AIR) {
+                                            if (bundles.get(e) != null) {
+                                                ItemStack Bundleitem = new ItemStack(bundles.get(e).getType());
+                                                Bundleitem.setLore(bundles.get(e).getLore());
+                                                if (blacklisteditems.contains(Bundleitem)){
+                                                    p.sendMessage("You cant dupe this item!");
+                                                    return true;
+                                                }else if(Bundleitem.getType().toString().contains("BUNDLE")){
+                                                    p.sendMessage("You can't dupe this item!");
+                                                    return true;
+                                                }else if(bundles.get(e).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))){
+                                                    p.sendMessage("You can't dupe this item!");
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }else if(shulkerBox.getInventory().getItem(i).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))){
+                                    p.sendMessage("You can't dupe this item!");
                                     return true;
                                 }
                             }
@@ -64,6 +92,12 @@ public class dupe implements CommandExecutor {
                             itemStack.setLore(bundle.get(i).getLore());
                             if (blacklisteditems.contains(itemStack)){
                                 p.sendMessage("You cant dupe this item!");
+                                return true;
+                            }else if(itemStack.getType().toString().contains("BUNDLE")){
+                                p.sendMessage("You can't dupe this item");
+                                return true;
+                            }else if(bundle.get(i).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))) {
+                                p.sendMessage("You can't dupe this item!");
                                 return true;
                             }
                         }
