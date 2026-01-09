@@ -19,9 +19,9 @@ public final class DupePlusPlus extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         if (getConfig().getList("blacklisted items") != null) {
-            blacklisteditems = (List<Material>) getConfig().getList("blacklisted items");
+            blacklisteditems = (List<ItemStack>) getConfig().getList("blacklisted items");
         } else {
-            blacklisteditems = new ArrayList<Material>();
+            blacklisteditems = new ArrayList<ItemStack>();
             // Plugin startup logic
         }
         getCommand("blacklist").setExecutor(new blacklist());

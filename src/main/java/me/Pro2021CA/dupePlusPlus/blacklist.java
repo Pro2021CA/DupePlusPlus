@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class blacklist implements CommandExecutor {
-    public static List<Material> blacklisteditems;
+    public static List<ItemStack> blacklisteditems;
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p){
@@ -33,7 +33,13 @@ public class blacklist implements CommandExecutor {
                     return true;
                 }
                 Material material = p.getInventory().getItemInMainHand().getType();
-                blacklisteditems.add(material);
+                ItemStack item = new ItemStack(material);
+                item.setLore(p.getInventory().getItemInMainHand().getLore());
+                if (blacklisteditems.contains(item)){
+                    p.sendMessage("this is already blacklisted");
+                    return true;
+                }
+                blacklisteditems.add(item);
                 DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
                 DupePlusPlus.plugin.getConfig().createSection("how");
                 DupePlusPlus.plugin.saveConfig();

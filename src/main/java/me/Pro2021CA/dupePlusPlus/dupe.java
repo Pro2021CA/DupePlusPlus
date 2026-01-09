@@ -1,12 +1,17 @@
 package me.Pro2021CA.dupePlusPlus;
 
+import io.papermc.paper.datacomponent.item.BundleContents;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,11 +30,45 @@ public class dupe implements CommandExecutor {
             } else {
                 dupeamount = Integer.parseInt(strings[0]);
             }
-            ItemStack tool = p.getInventory().getItemInMainHand();
-            blacklisteditems = (List<Material>) DupePlusPlus.plugin.getConfig().getList("blacklisted items");
-            if (blacklisteditems.contains(tool.getType())){
+            ItemStack tool = new ItemStack(p.getInventory().getItemInMainHand().getType());
+            tool.setLore(p.getInventory().getItemInMainHand().getLore());
+            blacklisteditems = (List<ItemStack>) DupePlusPlus.plugin.getConfig().getList("blacklisted items");
+            if (blacklisteditems.contains(tool)){
                 p.sendMessage("You can't dupe this item");
                 return true;
+            }
+            if(p.getInventory().getItemInMainHand().getItemMeta() instanceof BlockStateMeta){
+                BlockStateMeta im = (BlockStateMeta)p.getInventory().getItemInMainHand().getItemMeta();
+                if(im.getBlockState() instanceof ShulkerBox){
+                    ShulkerBox shulkerBox = (ShulkerBox) im.getBlockState();
+                    for (int i = 0; i < shulkerBox.getInventory().getSize(); i++) {
+                        if (shulkerBox.getInventory().getItem(i) != null){
+                            if (shulkerBox.getInventory().getItem(i).getType() != Material.AIR){
+                                ItemStack item = new ItemStack(shulkerBox.getInventory().getItem(i).getType());
+                                item.setLore(shulkerBox.getInventory().getItem(i).getLore());
+                                if (blacklisteditems.contains(item)) {
+                                    p.sendMessage("you can't dupe this item");
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }else if(p.getInventory().getItemInMainHand().getType().toString().contains("BUNDLE")){
+                BundleMeta bundleMeta = (BundleMeta) p.getInventory().getItemInMainHand().getItemMeta();
+                List<ItemStack> bundle = bundleMeta.getItems();
+                for (int i = 0; i < bundleMeta.getItems().size(); i++){
+                    if (bundle.get(i).getType() != Material.AIR) {
+                        if (bundle.get(i) != null) {
+                            ItemStack itemStack = new ItemStack(bundle.get(i).getType());
+                            itemStack.setLore(bundle.get(i).getLore());
+                            if (blacklisteditems.contains(itemStack)){
+                                p.sendMessage("You cant dupe this item!");
+                                return true;
+                            }
+                        }
+                    }
+                }
             }
             for (int i = 0; i < dupeamount; i++) {
                 p.give(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
