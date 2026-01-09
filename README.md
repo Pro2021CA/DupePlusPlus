@@ -15,3 +15,6 @@ Supports bundles and Shulkers!!
 
 Details:
  this plugin works by checking the itemtype and lore, everything else gets ignored. This is to make sure you can't bypass it as a player. If you have suggestions on other things i should make it check for lmk.
+
+Note:
+this is still heavily wip, so a lot of things might be missing. Any ideas, you guessed it, lmk.
