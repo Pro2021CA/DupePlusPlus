@@ -21,30 +21,40 @@ public class blacklist implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p){
             if (strings.length == 0) {
-                p.sendMessage("No arguments defined");
+                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "No arguments defined");
                 return true;
             }else if (strings[0].equals("list")){
                 for (int i = 0; i < blacklisteditems.size(); i++){
                     p.sendMessage(blacklisteditems.get(i).toString());
                 }
-            }else if (strings[0].equals("add")){
-                if (p.getInventory().getItemInMainHand().getType() == Material.AIR || p.getInventory().getItemInMainHand() == null){
-                    p.sendMessage("You cant blacklist air");
+            }else if (strings[0].equals("add")) {
+                if (p.getInventory().getItemInMainHand().getType() == Material.AIR || p.getInventory().getItemInMainHand() == null) {
+                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You cant blacklist air");
                     return true;
                 }
                 Material material = p.getInventory().getItemInMainHand().getType();
                 ItemStack item = new ItemStack(material);
                 item.setLore(p.getInventory().getItemInMainHand().getLore());
-                if (blacklisteditems.contains(item)){
-                    p.sendMessage("this is already blacklisted");
+                if (blacklisteditems.contains(item)) {
+                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "this is already blacklisted");
                     return true;
                 }
                 blacklisteditems.add(item);
                 DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
-                DupePlusPlus.plugin.getConfig().createSection("how");
                 DupePlusPlus.plugin.saveConfig();
+            }else if (strings[0].equals("remove")){
+                ItemStack itemStack = new ItemStack(p.getInventory().getItemInMainHand().getType());
+                itemStack.setLore(p.getInventory().getItemInMainHand().getLore());
+                if (blacklisteditems.contains(itemStack)){
+                    blacklisteditems.remove(itemStack);
+                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "Removed from blacklist");
+                    return true;
+                }else{
+                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "This item is not blacklisted, use /blacklist add");
+                    return true;
+                }
             }else{
-                p.sendMessage("usage: /blacklist <list/add>");
+                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "usage: /blacklist <list/add/remove>");
             }
         }
         return true;

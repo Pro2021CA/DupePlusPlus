@@ -35,10 +35,10 @@ public class dupe implements CommandExecutor {
             tool.setLore(p.getInventory().getItemInMainHand().getLore());
             blacklisteditems = (List<ItemStack>) DupePlusPlus.plugin.getConfig().getList("blacklisted items");
             if (blacklisteditems.contains(tool)){
-                p.sendMessage("You can't dupe this item");
+                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item");
                 return true;
             }else if(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))) {
-                p.sendMessage("You can't dupe this item!");
+                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!");
                 return true;
             }
             if(p.getInventory().getItemInMainHand().getItemMeta() instanceof BlockStateMeta){
@@ -51,7 +51,7 @@ public class dupe implements CommandExecutor {
                                 ItemStack item = new ItemStack(shulkerBox.getInventory().getItem(i).getType());
                                 item.setLore(shulkerBox.getInventory().getItem(i).getLore());
                                 if (blacklisteditems.contains(item)) {
-                                    p.sendMessage("you can't dupe this item");
+                                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "you can't dupe this item");
                                     return true;
                                 }else if(item.getType().toString().contains("BUNDLE")){
                                     BundleMeta bundlemetastuff = (BundleMeta) shulkerBox.getInventory().getItem(i).getItemMeta();
@@ -62,20 +62,20 @@ public class dupe implements CommandExecutor {
                                                 ItemStack Bundleitem = new ItemStack(bundles.get(e).getType());
                                                 Bundleitem.setLore(bundles.get(e).getLore());
                                                 if (blacklisteditems.contains(Bundleitem)){
-                                                    p.sendMessage("You cant dupe this item!");
+                                                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You cant dupe this item!");
                                                     return true;
                                                 }else if(Bundleitem.getType().toString().contains("BUNDLE")){
-                                                    p.sendMessage("You can't dupe this item!");
+                                                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!");
                                                     return true;
                                                 }else if(bundles.get(e).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))){
-                                                    p.sendMessage("You can't dupe this item!");
+                                                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!");
                                                     return true;
                                                 }
                                             }
                                         }
                                     }
                                 }else if(shulkerBox.getInventory().getItem(i).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))){
-                                    p.sendMessage("You can't dupe this item!");
+                                    p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!");
                                     return true;
                                 }
                             }
@@ -91,27 +91,28 @@ public class dupe implements CommandExecutor {
                             ItemStack itemStack = new ItemStack(bundle.get(i).getType());
                             itemStack.setLore(bundle.get(i).getLore());
                             if (blacklisteditems.contains(itemStack)){
-                                p.sendMessage("You cant dupe this item!");
+                                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You cant dupe this item!");
                                 return true;
                             }else if(itemStack.getType().toString().contains("BUNDLE")){
-                                p.sendMessage("You can't dupe this item");
+                                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item");
                                 return true;
                             }else if(bundle.get(i).getItemMeta().getPersistentDataContainer().has(new NamespacedKey(DupePlusPlus.plugin, "dupeable"))) {
-                                p.sendMessage("You can't dupe this item!");
+                                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!");
                                 return true;
                             }
                         }
                     }
                 }
             }
+            maxdupe.MaxDupe = DupePlusPlus.plugin.getConfig().getInt("maxdupe");
             if (dupeamount > maxdupe.MaxDupe){
-                p.sendMessage("You can only dupe " + maxdupe.MaxDupe + " times");
+                p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can only dupe " + maxdupe.MaxDupe + " times");
                 return true;
             }
             for (int i = 0; i < dupeamount; i++) {
                 p.give(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
             }
-            p.sendMessage("Duped " + dupeamount + " times");
+            p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times");
         }return true;
     }
 }
