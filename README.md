@@ -7,8 +7,9 @@ Experience bugs? DM me on discord (pro2021ca)
 
 Commands:
  /dupe <amount>: dupes your item
- /blacklist <add/list>: add an item to blacklist or view all items in the blacklist (can also be found in config). Will be adding /blacklist remove later, for now change the config while server is offline
+ /blacklist <add/list/remove>: add an item to blacklist or view all items in the blacklist (can also be found in config).
  /nondupeable: apply custom data to make the item you're holding not dupeable
+ /maxdupe <amount>: set the amount the players can dupe (defaults to 1)
 
 Supports bundles and Shulkers!!
 
