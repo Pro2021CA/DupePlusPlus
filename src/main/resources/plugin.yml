@@ -14,3 +14,6 @@ commands:
   maxdupe:
     usage: /<command>
     permission: dupeplusplus.maxdupe
+  maxdupe:
+    usage: /<command>
+    permission: dupeplusplus.maxdupe
