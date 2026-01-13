@@ -22,15 +22,7 @@ public final class DupePlusPlus extends JavaPlugin {
             blacklisteditems = (List<ItemStack>) getConfig().getList("blacklisted items");
         } else {
             blacklisteditems = new ArrayList<ItemStack>();
-            getConfig().set("blacklisted items", blacklisteditems);
-            saveConfig();
             // Plugin startup logic
-        }
-        if (getConfig().getInt("maxdupe") == 0){
-            getConfig().set("maxdupe", 1);
-            maxdupe.MaxDupe = 1;
-        }else{
-            maxdupe.MaxDupe = getConfig().getInt("maxdupe");
         }
         getCommand("blacklist").setExecutor(new blacklist());
         getCommand("dupe").setExecutor(new dupe());
@@ -41,7 +33,6 @@ public final class DupePlusPlus extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         plugin.getConfig().set("blacklisted items", blacklisteditems);
-        plugin.getConfig().set("maxdupe", maxdupe.MaxDupe);
         saveConfig();
     }
 }
