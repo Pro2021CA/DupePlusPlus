@@ -1,7 +1,5 @@
 package me.Pro2021CA.dupePlusPlus;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +9,6 @@ import org.bukkit.plugin.PluginLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
 public class maxdupe implements CommandExecutor {
     public static int MaxDupe;
