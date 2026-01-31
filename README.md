@@ -1,21 +1,29 @@
-Tired of people being able to dupe items you don't want them to?
+# DupePlusPlus
+The future of duping is here!
+> [!NOTE]
+> This is a remake of the popular dupe plugin DupePlus<br>
+> This plugin fixes the biggest glitches in DupePlus.<br>
+> It is based on an earlier dupe skript I made.
 
-This is a remake of the popular dupe plugin DupePlus, this plugin fixes the biggest glitches in DupePlus.
-
-Experience bugs? DM me on discord (pro2021ca)
-
-
-Commands:
+## Commands:
+```
  /dupe <amount>: dupes your item
  /blacklist <add/list/remove>: add an item to blacklist or view all items in the blacklist (can also be found in config).
  /nondupeable: apply custom data to make the item you're holding not dupeable
  /maxdupe <amount>: set the amount the players can dupe (defaults to 1)
+ ```
 
-Supports bundles and Shulkers!!
+## Features:
+- Easily blacklist items!
+- Able to blacklist items by adding custom data to them!
+- Configure the amount that players can dupe!
+> [!TIP]
+> make sure to join my [discord](https://discord.gg/SGcaMcxhbW) to know when a new update releases!
 
+> [!IMPORTANT]
+> Details:
+> this plugin works by checking the itemtype and lore, everything else gets ignored. This is to make sure you can't bypass it as a player. If you have suggestions on other things i should make it check for lmk.
 
-Details:
- this plugin works by checking the itemtype and lore, everything else gets ignored. This is to make sure you can't bypass it as a player. If you have suggestions on other things i should make it check for lmk.
+> [!CAUTION]
+> while this plugin is based on a skript I made before that hasn't had any dupes, this is still heavily wip so a lot of things might be missing.
 
-Note:
-this is still heavily wip, so a lot of things might be missing. Any ideas, you guessed it, lmk.
