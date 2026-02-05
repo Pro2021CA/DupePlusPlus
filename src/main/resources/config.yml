@@ -1,2 +1,3 @@
-# this list makes sure the blacklisted items stay after restart
-blacklisted items:
+blacklisted items: []
+maxdupe: 1
+prefix: "<green>[Dupe++]<white> "

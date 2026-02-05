@@ -2,9 +2,10 @@ name: DupePlusPlus
 version: '1.0-SNAPSHOT'
 main: me.Pro2021CA.dupePlusPlus.DupePlusPlus
 api-version: '1.21'
+author: Pro2021CA
 commands:
   blacklist:
-    usage: /<command> <list/add>
+    usage: /<command> <list/add/remove>
     permission: dupeplusplus.blacklist
   dupe:
     usage: /<command> <amount>
@@ -12,8 +13,5 @@ commands:
     usage: /<command>
     permission: dupeplusplus.nondupe
   maxdupe:
-    usage: /<command>
-    permission: dupeplusplus.maxdupe
-  maxdupe:
-    usage: /<command>
+    usage: /<command> <amount>
     permission: dupeplusplus.maxdupe
