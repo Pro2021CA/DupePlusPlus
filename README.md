@@ -17,9 +17,9 @@ The future of duping is here!
 - Easily blacklist items!
 - Able to blacklist items by adding custom data to them!
 - Configure the amount that players can dupe!
+- use the permission ```dupeplusplus.dupe.<amount>``` to bypass the normal maxdupe limit. max is 25.
 > [!TIP]
 > make sure to join my [discord](https://discord.gg/SGcaMcxhbW) to know when a new update releases!
-> Use the permission ```dupeplusplus.dupe.<amount>``` to bypass the default maxdupe, max is 25.
 
 > [!IMPORTANT]
 > Details:
