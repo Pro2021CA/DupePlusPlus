@@ -19,6 +19,7 @@ The future of duping is here!
 - Configure the amount that players can dupe!
 > [!TIP]
 > make sure to join my [discord](https://discord.gg/SGcaMcxhbW) to know when a new update releases!
+> Use the permission ```dupeplusplus.dupe.<amount>``` to bypass the default maxdupe, max is 25.
 
 > [!IMPORTANT]
 > Details:
