@@ -155,7 +155,7 @@ public class DupeCommand implements CommandExecutor {
                 return true;
             }
             for (int i = 0; i < dupeamount; i++) {
-                p.give(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
+                p.getInventory().addItem(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
             }
             p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times"));
         }return true;
