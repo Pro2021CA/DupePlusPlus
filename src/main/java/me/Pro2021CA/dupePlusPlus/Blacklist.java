@@ -5,16 +5,21 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static me.Pro2021CA.dupePlusPlus.BlacklistGui.openBlacklistGui;
 
 public class Blacklist implements CommandExecutor {
     public static List<ItemStack> blacklisteditems;
+    public static List<Enchantment> blacklistedenchants;
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p){
@@ -69,8 +74,29 @@ public class Blacklist implements CommandExecutor {
                     return true;
                 }
             }
+            else if(strings[0].equals("enchants")){
+                if(blacklistedenchants == null){
+                    blacklistedenchants = new ArrayList<>();
+                }
+                Set<Enchantment> enchantments = p.getInventory().getItemInMainHand().getEnchantments().keySet();
+                enchantments.forEach(enchantment -> {
+                    if(!blacklistedenchants.contains(enchantment)){
+                        blacklistedenchants.add(enchantment);
+                    }
+                });
+                if(p.getInventory().getItemInMainHand().getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
+                    enchantmentStorageMeta.getStoredEnchants().keySet().forEach(enchantment -> {
+                        if(!blacklistedenchants.contains(enchantment)){
+                            blacklistedenchants.add(enchantment);
+                        }
+                    });
+                }
+                DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
+                DupePlusPlus.plugin.saveConfig();
+                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "Added enchants of your item to the blacklist"));
+            }
             else{
-                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "usage: /blacklist <list/add/remove>"));
+                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "usage: /blacklist <list/add/remove/enchants>"));
             }
         }
         return true;

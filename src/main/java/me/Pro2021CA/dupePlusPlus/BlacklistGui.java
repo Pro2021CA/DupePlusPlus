@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklisteditems;
+import static me.Pro2021CA.dupePlusPlus.EnchantmentGui.openEnchantmentGui;
 
 public class BlacklistGui {
     static void openBlacklistGui(Player p){
@@ -19,7 +20,9 @@ public class BlacklistGui {
                 .create();
         gui.setItem(6, 3, ItemBuilder.from(Material.PAPER).setName("Previous").asGuiItem(event -> gui.previous()));
         gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
-
+        gui.setItem(6, 1, ItemBuilder.from(Material.ENCHANTED_BOOK).setName("Enchantments").lore(MiniMessage.miniMessage().deserialize("<gray>Click to open")).asGuiItem(event -> {
+            openEnchantmentGui(p);
+        }));
         for (int i = 0; i < blacklisteditems.size(); i++) {
             gui.addItem(ItemBuilder.from(blacklisteditems.get(i)).asGuiItem(event -> {
                 ItemStack item = new ItemStack(event.getCurrentItem().getType());
@@ -33,7 +36,7 @@ public class BlacklistGui {
         }
         gui.setDefaultClickAction(event -> {
             event.setCancelled(true);
-            if (event.getSlot() == 51 || event.getSlot() == 47){
+            if (event.getSlot() == 51 || event.getSlot() == 47 || event.getSlot() == 45){
                 return;
             }
             if (event.getCurrentItem() == null){

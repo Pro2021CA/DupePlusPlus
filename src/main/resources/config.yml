@@ -1,3 +1,4 @@
 blacklisted items: []
+blacklisted enchants: []
 maxdupe: 1
 prefix: "<green>[Dupe++]<white> "
