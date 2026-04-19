@@ -135,10 +135,10 @@ public class DupeCommand implements CommandExecutor {
                                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item"));
                                 return true;
                             }else if(hasPDC(Bundle)) {
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix")) + "You can't dupe this item!");
+                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
                                 return true;
                             }else if(hasEnchants(Bundle)){
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix")) + "You can't dupe this item!");
+                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
                                 return true;
                             }
                         }
