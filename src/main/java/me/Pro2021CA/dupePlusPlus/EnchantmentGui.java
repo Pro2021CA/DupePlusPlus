@@ -27,8 +27,8 @@ public class EnchantmentGui{
             openBlacklistGui(p);
         }));
         for (int i = 0; i < blacklistedenchants.size(); i++) {
-            gui.addItem(ItemBuilder.from(Material.ENCHANTED_BOOK).enchant(blacklistedenchants.get(i)).asGuiItem(event -> {
-                Enchantment enchantment = blacklistedenchants.get(event.getSlot());
+            gui.addItem(ItemBuilder.from(Material.ENCHANTED_BOOK).enchant(Enchantment.getByName(blacklistedenchants.get(i))).asGuiItem(event -> {
+                String enchantment = blacklistedenchants.get(event.getSlot());
                 blacklistedenchants.remove(enchantment);
                 DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
                 DupePlusPlus.plugin.saveConfig();
@@ -46,14 +46,14 @@ public class EnchantmentGui{
             }
             Set<Enchantment> enchantments = event.getCurrentItem().getEnchantments().keySet();
             for(Enchantment enchantment : enchantments){
-                if(!blacklistedenchants.contains(enchantment)){
-                    blacklistedenchants.add(enchantment);
+                if(!blacklistedenchants.contains(enchantment.getName())){
+                    blacklistedenchants.add(enchantment.getName());
                 }
             }
             if(event.getCurrentItem().getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
                 for(Enchantment enchantment : enchantmentStorageMeta.getStoredEnchants().keySet()){
-                    if(!blacklistedenchants.contains(enchantment)){
-                        blacklistedenchants.add(enchantment);
+                    if(!blacklistedenchants.contains(enchantment.getName())){
+                        blacklistedenchants.add(enchantment.getName());
                     }
                 }
             }

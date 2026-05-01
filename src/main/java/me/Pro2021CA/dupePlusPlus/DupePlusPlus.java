@@ -24,7 +24,7 @@ public final class DupePlusPlus extends JavaPlugin {
         getCommand("maxdupe").setExecutor(new MaxDupe());
         MaxDupe.MaxDupe = getConfig().getInt("maxdupe");
         blacklisteditems = (List<ItemStack>) DupePlusPlus.plugin.getConfig().getList("blacklisted items");
-        blacklistedenchants = (List<Enchantment>) DupePlusPlus.plugin.getConfig().getList("blacklisted enchants");
+        blacklistedenchants = (List<String>) DupePlusPlus.plugin.getConfig().getList("blacklisted enchants");
     }
     @Override
     public void onDisable() {

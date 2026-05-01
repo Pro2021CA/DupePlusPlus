@@ -36,13 +36,13 @@ public class DupeFunctions {
             blacklistedenchants = new ArrayList<>();
         }
         for (Enchantment enchantment : item.getEnchantments().keySet()){
-            if(blacklistedenchants.contains(enchantment)){
+            if(blacklistedenchants.contains(enchantment.getName())){
                 return true;
             }
         }
         if(item.getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
             for (Enchantment enchantment : enchantmentStorageMeta.getStoredEnchants().keySet()){
-                if(blacklistedenchants.contains(enchantment)){
+                if(blacklistedenchants.contains(enchantment.getName())){
                     return true;
                 }
             }

@@ -19,7 +19,7 @@ import static me.Pro2021CA.dupePlusPlus.BlacklistGui.openBlacklistGui;
 
 public class Blacklist implements CommandExecutor {
     public static List<ItemStack> blacklisteditems;
-    public static List<Enchantment> blacklistedenchants;
+    public static List<String> blacklistedenchants;
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p){
@@ -80,18 +80,18 @@ public class Blacklist implements CommandExecutor {
                 }
                 Set<Enchantment> enchantments = p.getInventory().getItemInMainHand().getEnchantments().keySet();
                 enchantments.forEach(enchantment -> {
-                    if(!blacklistedenchants.contains(enchantment)){
-                        blacklistedenchants.add(enchantment);
+                    if(!blacklistedenchants.contains(enchantment.getName())){
+                        blacklistedenchants.add(enchantment.getName());
                     }
                 });
                 if(p.getInventory().getItemInMainHand().getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
                     enchantmentStorageMeta.getStoredEnchants().keySet().forEach(enchantment -> {
-                        if(!blacklistedenchants.contains(enchantment)){
-                            blacklistedenchants.add(enchantment);
+                        if(!blacklistedenchants.contains(enchantment.getName())){
+                            blacklistedenchants.add(enchantment.getName());
                         }
                     });
                 }
-                DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
+                DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
                 DupePlusPlus.plugin.saveConfig();
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "Added enchants of your item to the blacklist"));
             }
