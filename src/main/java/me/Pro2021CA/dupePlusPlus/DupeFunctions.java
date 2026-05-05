@@ -3,6 +3,7 @@ package me.Pro2021CA.dupePlusPlus;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -55,5 +56,32 @@ public class DupeFunctions {
             return true;
         }
         return false;
+    }
+
+    public static boolean dupe(Player p, ItemStack itemStack, int i){
+        for(int j = 0; j<i - 1; j++){
+            if(!p.getInventory().addItem(itemStack).isEmpty()){
+                return false;
+            }
+        }
+        if(!p.getInventory().addItem(itemStack).isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    public static boolean canDupe(Player p, int dupeamount){
+        if (dupeamount > MaxDupe.MaxDupe){
+            for (int i = 26 - MaxDupe.MaxDupe; i > 0; i--){
+                if (p.hasPermission("dupeplusplus.dupe." + i)){
+                    if (i < dupeamount){
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            return true;
+        }
     }
 }

@@ -28,6 +28,9 @@ public class EnchantmentGui{
         }));
         for (int i = 0; i < blacklistedenchants.size(); i++) {
             gui.addItem(ItemBuilder.from(Material.ENCHANTED_BOOK).enchant(Enchantment.getByName(blacklistedenchants.get(i))).asGuiItem(event -> {
+                if(!p.hasPermission("dupeplusplus.edit")){
+                    return;
+                }
                 String enchantment = blacklistedenchants.get(event.getSlot());
                 blacklistedenchants.remove(enchantment);
                 DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
@@ -42,6 +45,9 @@ public class EnchantmentGui{
                 return;
             }
             if (event.getCurrentItem() == null){
+                return;
+            }
+            if(!event.getWhoClicked().hasPermission("dupeplusplus.edit")){
                 return;
             }
             Set<Enchantment> enchantments = event.getCurrentItem().getEnchantments().keySet();

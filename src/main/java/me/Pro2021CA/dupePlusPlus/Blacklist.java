@@ -34,9 +34,12 @@ public class Blacklist implements CommandExecutor {
                 for (int i = 0; i < blacklisteditems.size(); i++){
                     openBlacklistGui(p);
                 }
-
             // blacklist an item
             }else if (strings[0].equals("add")){
+                if(!p.hasPermission("dupeplusplus.edit")) {
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No permission to change blacklist, do /blacklist list to view blacklisted items"));
+                    return true;
+                }
                 if (p.getInventory().getItemInMainHand().getType() == Material.AIR || p.getInventory().getItemInMainHand() == null){
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "You cant blacklist air"));
                     return true;
@@ -58,6 +61,10 @@ public class Blacklist implements CommandExecutor {
 
 
             }else if(strings[0].equals("remove")){
+                if(!p.hasPermission("dupeplusplus.edit")) {
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No permission to change blacklist, do /blacklist list to view blacklisted items"));
+                    return true;
+                }
                 Material material = p.getInventory().getItemInMainHand().getType();
                 ItemStack item = new ItemStack(material);
                 item.setLore(p.getInventory().getItemInMainHand().getLore());
@@ -75,6 +82,10 @@ public class Blacklist implements CommandExecutor {
                 }
             }
             else if(strings[0].equals("enchants")){
+                if(!p.hasPermission("dupeplusplus.edit")) {
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No permission to change blacklist, do /blacklist list to view blacklisted items"));
+                    return true;
+                }
                 if(blacklistedenchants == null){
                     blacklistedenchants = new ArrayList<>();
                 }
@@ -96,6 +107,10 @@ public class Blacklist implements CommandExecutor {
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "Added enchants of your item to the blacklist"));
             }
             else{
+                if(!p.hasPermission("dupeplusplus.edit")) {
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "usage: /blacklist <list>"));
+                    return true;
+                }
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "usage: /blacklist <list/add/remove/enchants>"));
             }
         }

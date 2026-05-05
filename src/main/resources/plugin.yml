@@ -15,3 +15,15 @@ commands:
   maxdupe:
     usage: /<command> <amount>
     permission: dupeplusplus.maxdupe
+permissions:
+  dupeplusplus.edit:
+    description: allows you to edit the blacklisted items
+  dupeplusplus.blacklist:
+    description: allows you to view the blacklisted items
+  dupeplusplus.maxdupe:
+    description: allows you to change the max dupe
+  dupeplusplus.nondupe:
+    description: allows you to blacklist one certain item by adding data to it
+  dupeplusplus.dupe:
+    children: [dupeplusplus.dupe.1, dupeplusplus.dupe.2, dupeplusplus.dupe.3, dupeplusplus.dupe.4, dupeplusplus.dupe.5, dupeplusplus.dupe.6 ,dupeplusplus.dupe.7 ,dupeplusplus.dupe.8 ,dupeplusplus.dupe.9 ,dupeplusplus.dupe.10, dupeplusplus.dupe.11, dupeplusplus.dupe.12, dupeplusplus.dupe.13, dupeplusplus.dupe.14, dupeplusplus.dupe.15,dupeplusplus.dupe.16, dupeplusplus.dupe.17, dupeplusplus.dupe.18, dupeplusplus.dupe.19, dupeplusplus.dupe.20, dupeplusplus.dupe.21, dupeplusplus.dupe.22, dupeplusplus.dupe.23, dupeplusplus.dupe.24, dupeplusplus.dupe.25]
+    description: allows you to bypass the normal max dupe

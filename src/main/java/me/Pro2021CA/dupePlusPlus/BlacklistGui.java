@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.logging.Level;
+
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklisteditems;
 import static me.Pro2021CA.dupePlusPlus.EnchantmentGui.openEnchantmentGui;
 
@@ -25,6 +27,9 @@ public class BlacklistGui {
         }));
         for (int i = 0; i < blacklisteditems.size(); i++) {
             gui.addItem(ItemBuilder.from(blacklisteditems.get(i)).asGuiItem(event -> {
+                if(!p.hasPermission("dupeplusplus.edit")){
+                    return;
+                }
                 ItemStack item = new ItemStack(event.getCurrentItem().getType());
                 item.setLore(event.getCurrentItem().getLore());
                 blacklisteditems.remove(item);
@@ -42,6 +47,9 @@ public class BlacklistGui {
             if (event.getCurrentItem() == null){
                 return;
             }
+            if(!event.getWhoClicked().hasPermission("dupeplusplus.edit")){
+                return;
+            }
             Material material = event.getCurrentItem().getType();
             ItemStack item = new ItemStack(material);
             item.setLore(event.getCurrentItem().getLore());
@@ -54,6 +62,7 @@ public class BlacklistGui {
             DupePlusPlus.plugin.saveConfig();
             openBlacklistGui(p);
         });
+        DupePlusPlus.plugin.getLogger().log(Level.FINE, "opening gui");
         gui.open(p);
     }
 }

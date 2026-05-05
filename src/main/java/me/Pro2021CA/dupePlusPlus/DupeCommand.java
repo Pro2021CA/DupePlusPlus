@@ -146,27 +146,16 @@ public class DupeCommand implements CommandExecutor {
                 }
             }
             // check for maxdupe amount
-            if (dupeamount > MaxDupe.MaxDupe){
-                for (int i = 26 - MaxDupe.MaxDupe; i > 0; i--){
-                    if (p.hasPermission("dupeplusplus.dupe." + i)){
-                        if (i < dupeamount){
-                            p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can only dupe " + i + " times"));
-                            return true;
-                        }
-                        for (int e = 0; e < dupeamount; e++) {
-                            p.getInventory().addItem(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
-                        }
-                        p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times"));
-                        return true;
-                    }
+            if(canDupe(p, dupeamount)){
+                if(dupe(p, p.getInventory().getItemInMainHand(), dupeamount) == true){
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times"));
+
+                }else{
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Not enough inventory space!"));
                 }
-                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can only dupe " + MaxDupe.MaxDupe + " times"));
-                return true;
+            }else{
+                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this many times!"));
             }
-            for (int i = 0; i < dupeamount; i++) {
-                p.getInventory().addItem(p.getInventory().getItem(p.getInventory().getHeldItemSlot()));
-            }
-            p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times"));
         }return true;
     }
 }
