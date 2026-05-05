@@ -8,9 +8,11 @@ The future of duping is here!
 ## Commands:
 ```
  /dupe <amount>: dupes your item
- /blacklist <add/list/remove>: add an item to blacklist or view all items in the blacklist (can also be found in config).
+ /blacklist <add/remove>: add an item to the blacklist.
+ /blacklist list: open a gui that shows all blacklisted items, click the item to remove it from the blacklist and click an item in your inventory to add it to the blacklist.
+ /blacklist enchants: blacklist all enchants of the item you're holding. (ignores level)
  /nondupeable: apply custom data to make the item you're holding not dupeable
- /maxdupe <amount>: set the amount the players can dupe (defaults to 1)
+ /maxdupe <amount>: set the amount the players can dupe (defaults to 1). This gets overriden by the dupeplusplus.dupe.<amount> permission.
  ```
 
 ## Permissions:
