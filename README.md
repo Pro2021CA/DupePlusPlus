@@ -23,7 +23,3 @@ The future of duping is here!
 > [!IMPORTANT]
 > Details:
 > this plugin works by checking the itemtype and lore, everything else gets ignored. This is to make sure you can't bypass it as a player. If you have suggestions on other things i should make it check for lmk.
-
-> [!CAUTION]
-> while this plugin is based on a skript I made before that hasn't had any dupes, this is still heavily wip so a lot of things might be missing.
-
