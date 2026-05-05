@@ -13,6 +13,15 @@ The future of duping is here!
  /maxdupe <amount>: set the amount the players can dupe (defaults to 1)
  ```
 
+## Permissions:
+```
+  dupeplusplus.edit: allows you to edit the blacklisted items
+  dupeplusplus.blacklist: allows you to view the blacklisted items
+  dupeplusplus.maxdupe: allows you to change the max dupe
+  dupeplusplus.nondupe: allows you to blacklist one certain item by adding data to it
+  dupeplusplus.dupe: allows you to bypass the normal max dupe
+```
+
 ## Features:
 - Easily blacklist items!
 - Able to blacklist items by adding custom data to them!
