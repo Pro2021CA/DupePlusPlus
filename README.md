@@ -28,6 +28,7 @@ The future of duping is here!
 - Easily blacklist items!
 - Able to blacklist items by adding custom data to them!
 - Configure the amount that players can dupe!
+- Able to blacklist enchants (ignores level)
 > [!TIP]
 > make sure to join my [discord](https://discord.gg/SGcaMcxhbW) to know when a new update releases!
 
