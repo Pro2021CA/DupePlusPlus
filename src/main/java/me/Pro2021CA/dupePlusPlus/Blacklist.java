@@ -31,9 +31,7 @@ public class Blacklist implements CommandExecutor {
 
             // get list of blacklisted items
             }else if (strings[0].equals("list")){
-                for (int i = 0; i < blacklisteditems.size(); i++){
-                    openBlacklistGui(p);
-                }
+                openBlacklistGui(p);
             // blacklist an item
             }else if (strings[0].equals("add")){
                 if(!p.hasPermission("dupeplusplus.edit")) {

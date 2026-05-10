@@ -62,7 +62,6 @@ public class BlacklistGui {
             DupePlusPlus.plugin.saveConfig();
             openBlacklistGui(p);
         });
-        DupePlusPlus.plugin.getLogger().log(Level.FINE, "opening gui");
         gui.open(p);
     }
 }

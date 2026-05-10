@@ -147,7 +147,7 @@ public class DupeCommand implements CommandExecutor {
             }
             // check for maxdupe amount
             if(canDupe(p, dupeamount)){
-                if(dupe(p, p.getInventory().getItemInMainHand(), dupeamount) == true){
+                if(dupe(p, dupeamount) == true){
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Duped " + dupeamount + " times"));
 
                 }else{

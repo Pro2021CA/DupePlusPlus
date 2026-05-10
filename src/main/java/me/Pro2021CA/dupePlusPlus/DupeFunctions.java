@@ -58,13 +58,13 @@ public class DupeFunctions {
         return false;
     }
 
-    public static boolean dupe(Player p, ItemStack itemStack, int i){
+    public static boolean dupe(Player p, int i){
         for(int j = 0; j<i - 1; j++){
-            if(!p.getInventory().addItem(itemStack).isEmpty()){
+            if(!p.getInventory().addItem(p.getInventory().getItemInMainHand()).isEmpty()){
                 return false;
             }
         }
-        if(!p.getInventory().addItem(itemStack).isEmpty()){
+        if(!p.getInventory().addItem(p.getInventory().getItemInMainHand()).isEmpty()){
             return false;
         }
         return true;
