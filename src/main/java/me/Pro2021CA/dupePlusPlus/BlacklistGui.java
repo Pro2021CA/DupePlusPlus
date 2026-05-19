@@ -8,15 +8,13 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.logging.Level;
-
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklisteditems;
 import static me.Pro2021CA.dupePlusPlus.EnchantmentGui.openEnchantmentGui;
 
 public class BlacklistGui {
     static void openBlacklistGui(Player p){
         PaginatedGui gui = Gui.paginated()
-                .title(MiniMessage.miniMessage().deserialize("<green>DupePlusPlus GUI"))
+                .title(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("guititle")))
                 .rows(6)
                 .pageSize(45)
                 .create();
@@ -33,8 +31,8 @@ public class BlacklistGui {
                 ItemStack item = new ItemStack(event.getCurrentItem().getType());
                 item.setLore(event.getCurrentItem().getLore());
                 blacklisteditems.remove(item);
-                DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
-                DupePlusPlus.plugin.saveConfig();
+                DupeFunctions.getConfig().set("blacklisted items", blacklisteditems);
+                DupeFunctions.save();
                 event.setCancelled(true);
                 openBlacklistGui(p);
             }));
@@ -58,8 +56,8 @@ public class BlacklistGui {
             }
 
             blacklisteditems.add(item);
-            DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
-            DupePlusPlus.plugin.saveConfig();
+            DupeFunctions.getConfig().set("blacklisted items", blacklisteditems);
+            DupeFunctions.save();
             openBlacklistGui(p);
         });
         gui.open(p);

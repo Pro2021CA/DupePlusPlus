@@ -1,4 +1,41 @@
-blacklisted items: []
-blacklisted enchants: []
-maxdupe: 1
-prefix: "<green>[Dupe++]<white> "
+#
+#  ██████╗░██╗░░░██╗██████╗░███████╗██████╗░██╗░░░░░██╗░░░██╗░██████╗██████╗░██╗░░░░░██╗░░░██╗░██████╗
+#    ██╔══██╗██║░░░██║██╔══██╗██╔════╝██╔══██╗██║░░░░░██║░░░██║██╔════╝██╔══██╗██║░░░░░██║░░░██║██╔════╝
+#    ██║░░██║██║░░░██║██████╔╝█████╗░░██████╔╝██║░░░░░██║░░░██║╚█████╗░██████╔╝██║░░░░░██║░░░██║╚█████╗░
+#    ██║░░██║██║░░░██║██╔═══╝░██╔══╝░░██╔═══╝░██║░░░░░██║░░░██║░╚═══██╗██╔═══╝░██║░░░░░██║░░░██║░╚═══██╗
+#    ██████╔╝╚██████╔╝██║░░░░░███████╗██║░░░░░███████╗╚██████╔╝██████╔╝██║░░░░░███████╗╚██████╔╝██████╔╝
+#    ╚═════╝░░╚═════╝░╚═╝░░░░░╚══════╝╚═╝░░░░░╚══════╝░╚═════╝░╚═════╝░╚═╝░░░░░╚══════╝░╚═════╝░╚═════╝░
+#  ░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ 　 █▀▀▄ █──█ 　 ░█▀▀█ █▀▀█ █▀▀█ █▀█ █▀▀█ █▀█ ▄█─ ░█▀▀█ ─█▀▀█
+#  ░█░█░█ █▄▄█ █──█ █▀▀ 　 █▀▀▄ █▄▄█ 　 ░█▄▄█ █▄▄▀ █──█ ─▄▀ █▄▀█ ─▄▀ ─█─ ░█─── ░█▄▄█
+#  ░█──░█ ▀──▀ ▀▀▀─ ▀▀▀ 　 ▀▀▀─ ▄▄▄█ 　 ░█─── ▀─▀▀ ▀▀▀▀ █▄▄ █▄▄█ █▄▄ ▄█▄ ░█▄▄█ ░█─░█
+
+
+
+#  ╭━━━╮╱╱╱╱╱╱╱╱╱╱╱╱╱╭╮
+#  ┃╭━╮┃╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
+#  ┃┃╱╰╋━━┳━╮╭━━┳━┳━━┫┃
+#  ┃┃╭━┫┃━┫╭╮┫┃━┫╭┫╭╮┃┃
+#  ┃╰┻━┃┃━┫┃┃┃┃━┫┃┃╭╮┃╰╮
+#  ╰━━━┻━━┻╯╰┻━━┻╯╰╯╰┻━╯
+prefix: "<green>[Dupe++]<white> " # the prefix displayed infront of messages (uses minimessage format https://docs.papermc.io/adventure/minimessage/)
+checkenchantments: true # decides whether the enchantment blacklist gets checked when duping
+checkdata: true # decides whether it checks the extra data added to an item after using /nondupeable
+guititle: "<green>DupePlusPlus GUI" # the title of the gui in /blacklist list
+
+
+#  ╭━━━╮
+#  ╰╮╭╮┃
+#  ╱┃┃┃┣╮╭┳━━┳━━╮
+#  ╱┃┃┃┃┃┃┃╭╮┃┃━┫
+#  ╭╯╰╯┃╰╯┃╰╯┃┃━┫
+#  ╰━━━┻━━┫╭━┻━━╯
+#  ╱╱╱╱╱╱╱┃┃
+#  ╱╱╱╱╱╱╱╰╯
+maxdupe: 1 # default max dupe
+permissionmaxdupe: 25 # the max number checked when checking for permissions to dupe more than the default max dupe
+inventoryfullmessage: true # whether the inventory full message should be send
+cooldown: 0 # cooldown between dupes (in seconds)
+
+
+
+# view all of these values with the /dupeconfig command

@@ -1,9 +1,12 @@
 name: DupePlusPlus
-version: '3.5-SNAPSHOT'
+version: '4.0-SNAPSHOT'
 main: me.Pro2021CA.dupePlusPlus.DupePlusPlus
 api-version: '1.21'
 author: Pro2021CA
 commands:
+  dupeconfig:
+    usage: /<command>
+    permission: dupeplusplus.dupeconfig
   blacklist:
     usage: /<command> <list/add/remove/enchants>
     permission: dupeplusplus.blacklist

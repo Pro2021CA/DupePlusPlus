@@ -19,7 +19,9 @@ import static me.Pro2021CA.dupePlusPlus.BlacklistGui.openBlacklistGui;
 
 public class Blacklist implements CommandExecutor {
     public static List<ItemStack> blacklisteditems;
-    public static List<String> blacklistedenchants;
+    public static List<List<String>> blacklistedenchants;
+    private static List<String> enchantments1;
+
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p){
@@ -51,11 +53,11 @@ public class Blacklist implements CommandExecutor {
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "this is already blacklisted"));
                     return true;
                 }
-
+                p.sendMessage(MiniMessage.miniMessage().deserialize( DupePlusPlus.plugin.getConfig().getString("prefix") + "Item Blacklisted!"));
                 // blacklist the item
                 blacklisteditems.add(item);
-                DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
-                DupePlusPlus.plugin.saveConfig();
+                DupeFunctions.getConfig().set("blacklisted items", blacklisteditems);
+                DupeFunctions.save();
 
 
             }else if(strings[0].equals("remove")){
@@ -70,8 +72,8 @@ public class Blacklist implements CommandExecutor {
                 // check if item is blacklisted
                 if(blacklisteditems.contains(item)){
                     blacklisteditems.remove(item);
-                    DupePlusPlus.plugin.getConfig().set("blacklisted items", blacklisteditems);
-                    DupePlusPlus.plugin.saveConfig();
+                    DupeFunctions.getConfig().set("blacklisted items", blacklisteditems);
+                    DupeFunctions.save();
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "Removed from blacklist"));
                     return true;
                 }else{
@@ -87,21 +89,23 @@ public class Blacklist implements CommandExecutor {
                 if(blacklistedenchants == null){
                     blacklistedenchants = new ArrayList<>();
                 }
+                enchantments1 = new ArrayList<>();
                 Set<Enchantment> enchantments = p.getInventory().getItemInMainHand().getEnchantments().keySet();
                 enchantments.forEach(enchantment -> {
-                    if(!blacklistedenchants.contains(enchantment.getName())){
-                        blacklistedenchants.add(enchantment.getName());
+                    if(!enchantments1.contains(enchantment.getName())){
+                        enchantments1.add(enchantment.getName());
                     }
                 });
                 if(p.getInventory().getItemInMainHand().getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
                     enchantmentStorageMeta.getStoredEnchants().keySet().forEach(enchantment -> {
-                        if(!blacklistedenchants.contains(enchantment.getName())){
-                            blacklistedenchants.add(enchantment.getName());
+                        if(!enchantments1.contains(enchantment.getName())){
+                            enchantments1.add(enchantment.getName());
                         }
                     });
                 }
-                DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
-                DupePlusPlus.plugin.saveConfig();
+                blacklistedenchants.add(enchantments1);
+                DupeFunctions.getConfig().set("blacklisted enchants", blacklistedenchants);
+                DupeFunctions.save();
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "Added enchants of your item to the blacklist"));
             }
             else{

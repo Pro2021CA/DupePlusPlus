@@ -1,6 +1,7 @@
 package me.Pro2021CA.dupePlusPlus;
 
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,10 +13,10 @@ public class MaxDupe implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         MaxDupe = Integer.parseInt(strings[0]);
+        DupePlusPlus.plugin.getConfig().set("maxdupe", Integer.parseInt(strings[0]));
+        DupePlusPlus.plugin.saveConfig();
         if (commandSender instanceof Player p){
-            p.sendMessage(DupePlusPlus.plugin.getConfig().getString("prefix") + "Max dupe set");
-            DupePlusPlus.plugin.getConfig().set("maxdupe", Integer.parseInt(strings[0]));
-            DupePlusPlus.plugin.saveConfig();
+            p.sendMessage(MiniMessage.miniMessage().deserialize( DupePlusPlus.plugin.getConfig().getString("prefix") + "Max dupe set"));
         }
         return true;
     }

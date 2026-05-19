@@ -51,6 +51,10 @@
                             <pattern>dev.triumphteam.gui</pattern>
                             <shadedPattern>me.Pro2021CA.dupePlusPlus.gui</shadedPattern> <!-- Replace package here here -->
                         </relocation>
+                            <relocation>
+                                <pattern>org.bstats</pattern>
+                                <shadedPattern>me.Pro2021CA.dupePlusPlus.bStats</shadedPattern>
+                            </relocation>
                     </relocations>
                 </configuration>
                 <executions>
@@ -89,6 +93,12 @@
             <groupId>dev.triumphteam</groupId>
             <artifactId>triumph-gui</artifactId>
             <version>3.1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.2.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

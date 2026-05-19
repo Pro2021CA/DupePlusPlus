@@ -3,31 +3,31 @@ package me.Pro2021CA.dupePlusPlus;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.BundleMeta;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklistedenchants;
-import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklisteditems;
 import static me.Pro2021CA.dupePlusPlus.DupeFunctions.*;
 
 public class DupeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player p) {
+
+            if(isOnCooldown(p)){
+                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You're on cooldown for " + remainingCooldown(p) + " seconds"));
+                return true;
+            }
+
             // check for arguments
             Integer dupeamount;
             if (strings.length == 0) {
@@ -153,6 +153,7 @@ public class DupeCommand implements CommandExecutor {
                 }else{
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Not enough inventory space!"));
                 }
+                setCooldown(p, Long.parseLong(DupePlusPlus.plugin.getConfig().get("cooldown").toString()));
             }else{
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this many times!"));
             }

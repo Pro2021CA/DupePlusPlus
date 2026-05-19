@@ -9,15 +9,19 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-import java.util.Set;
+import java.util.*;
 
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklistedenchants;
 import static me.Pro2021CA.dupePlusPlus.BlacklistGui.openBlacklistGui;
 
 public class EnchantmentGui{
+
+    private static Map<Enchantment, Integer> enchantmentIntegerMap;
+    private static List<String> enchantments1;
+
     public static void openEnchantmentGui(Player p){
         PaginatedGui gui = Gui.paginated()
-                .title(MiniMessage.miniMessage().deserialize("<green>DupePlusPlus GUI"))
+                .title(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("guititle")))
                 .rows(6)
                 .pageSize(45)
                 .create();
@@ -27,14 +31,18 @@ public class EnchantmentGui{
             openBlacklistGui(p);
         }));
         for (int i = 0; i < blacklistedenchants.size(); i++) {
-            gui.addItem(ItemBuilder.from(Material.ENCHANTED_BOOK).enchant(Enchantment.getByName(blacklistedenchants.get(i))).asGuiItem(event -> {
+            enchantmentIntegerMap = new HashMap<>();
+            for(String str : blacklistedenchants.get(i)){
+                enchantmentIntegerMap.put(Enchantment.getByName(str), 1);
+            }
+            gui.addItem(ItemBuilder.from(Material.ENCHANTED_BOOK).enchant(enchantmentIntegerMap).asGuiItem(event -> {
                 if(!p.hasPermission("dupeplusplus.edit")){
                     return;
                 }
-                String enchantment = blacklistedenchants.get(event.getSlot());
+                List<String> enchantment = blacklistedenchants.get(event.getSlot());
                 blacklistedenchants.remove(enchantment);
-                DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
-                DupePlusPlus.plugin.saveConfig();
+                DupeFunctions.getConfig().set("blacklisted enchants", blacklistedenchants);
+                DupeFunctions.save();
                 event.setCancelled(true);
                 openEnchantmentGui(p);
             }));
@@ -51,20 +59,25 @@ public class EnchantmentGui{
                 return;
             }
             Set<Enchantment> enchantments = event.getCurrentItem().getEnchantments().keySet();
+            enchantments1 = new ArrayList<>();
             for(Enchantment enchantment : enchantments){
-                if(!blacklistedenchants.contains(enchantment.getName())){
-                    blacklistedenchants.add(enchantment.getName());
+                if(!enchantments1.contains(enchantment.getName())){
+                    enchantments1.add(enchantment.getName());
                 }
             }
             if(event.getCurrentItem().getItemMeta() instanceof EnchantmentStorageMeta enchantmentStorageMeta){
                 for(Enchantment enchantment : enchantmentStorageMeta.getStoredEnchants().keySet()){
-                    if(!blacklistedenchants.contains(enchantment.getName())){
-                        blacklistedenchants.add(enchantment.getName());
+                    if(!enchantments1.contains(enchantment.getName())){
+                        enchantments1.add(enchantment.getName());
                     }
                 }
             }
-            DupePlusPlus.plugin.getConfig().set("blacklisted enchants", blacklistedenchants);
-            DupePlusPlus.plugin.saveConfig();
+            if(blacklistedenchants.contains(enchantments1)){
+                return;
+            }
+            blacklistedenchants.add(enchantments1);
+            DupeFunctions.getConfig().set("blacklisted enchants", blacklistedenchants);
+            DupeFunctions.save();
             openEnchantmentGui(p);
         });
         gui.open(p);
