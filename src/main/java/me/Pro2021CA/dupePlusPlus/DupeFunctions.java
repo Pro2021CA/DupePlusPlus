@@ -102,9 +102,9 @@ public class DupeFunctions {
     }
     public static boolean canDupe(Player p, int dupeamount){
         if (dupeamount > MaxDupe.MaxDupe){
-            for (int i = DupePlusPlus.plugin.getConfig().getInt("permissionmaxdupe"); i > 0; i--){
+            for (int i = DupePlusPlus.plugin.getConfig().getInt("permissionmaxdupe") + 1; i > 0; i--){
                 if (p.hasPermission("dupeplusplus.dupe." + i)){
-                    return i < dupeamount;
+                    return i > dupeamount;
                 }
             }
             return false;

@@ -37,6 +37,12 @@ public class optionsCommand implements CommandExecutor {
                     event.setCancelled(true);
                 }));
             }
+            gui.setItem(6, 5, ItemBuilder.from(Material.GREEN_CONCRETE).name(MiniMessage.miniMessage().deserialize("<!italic><green>Reload Config!")).lore(MiniMessage.miniMessage().deserialize("<!italic><dark_gray>Click to reload the config")).asGuiItem(e -> {
+                e.setCancelled(true);
+                DupePlusPlus.plugin.reloadConfig();
+                gui.close(p);
+                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "Reloaded config!"));
+            }));
             gui.open(p);
         }
 
