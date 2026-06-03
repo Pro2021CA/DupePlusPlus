@@ -76,35 +76,11 @@ public class DupeCommand implements CommandExecutor {
                                 // check for bundle
                                 }else if(isBundle(item)){
                                     BundleMeta bundlemetastuff = (BundleMeta) shulkerBox.getInventory().getItem(i).getItemMeta();
-                                    List<ItemStack> bundles = bundlemetastuff.getItems();
-
-
-                                    // loop items in bundle
-                                    for (int e = 0; e < bundles.size(); e++){
-                                        if (bundles.get(e).getType() != Material.AIR) {
-                                            if (bundles.get(e) != null) {
-
-                                                // check if the item is blacklisted
-                                                ItemStack Bundleitem = bundles.get(e);
-                                                if (isBlacklisted(Bundleitem)){
-                                                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You cant dupe this item!"));
-                                                    return true;
-
-                                                // ban bundles inside of bundles
-                                                }else if(isBundle(Bundleitem)){
-                                                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
-                                                    return true;
-
-                                                }else if(hasPDC(Bundleitem)){
-                                                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
-                                                    return true;
-                                                }else if(hasEnchants(Bundleitem)){
-                                                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
-                                                    return true;
-                                                }
-                                            }
-                                        }
+                                    if(dupeBlacklist(bundlemetastuff)){
+                                        p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "you can't dupe this item"));
+                                        return true;
                                     }
+
                                 }else if(hasPDC(item)){
                                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
                                     return true;
@@ -121,28 +97,9 @@ public class DupeCommand implements CommandExecutor {
 
                 // loop items in bundle
                 BundleMeta bundleMeta = (BundleMeta) p.getInventory().getItemInMainHand().getItemMeta();
-                List<ItemStack> bundle = bundleMeta.getItems();
-                for (int i = 0; i < bundleMeta.getItems().size(); i++){
-                    if (bundle.get(i).getType() != Material.AIR) {
-                        if (bundle.get(i) != null) {
-
-                            // check if it's blacklisted
-                            ItemStack Bundle = bundle.get(i);
-                            if (isBlacklisted(Bundle)){
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You cant dupe this item!"));
-                                return true;
-                            }else if(isBundle(Bundle)){
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item"));
-                                return true;
-                            }else if(hasPDC(Bundle)) {
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
-                                return true;
-                            }else if(hasEnchants(Bundle)){
-                                p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe this item!"));
-                                return true;
-                            }
-                        }
-                    }
+                if(dupeBlacklist(bundleMeta)){
+                    p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "you can't dupe this item"));
+                    return true;
                 }
             }
             // check for maxdupe amount

@@ -40,11 +40,21 @@ public class Blacklist implements CommandExecutor {
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No permission to change blacklist, do /blacklist list to view blacklisted items"));
                     return true;
                 }
-                if (p.getInventory().getItemInMainHand().getType() == Material.AIR || p.getInventory().getItemInMainHand() == null){
+                if (p.getInventory().getItemInMainHand().getType() == Material.AIR && strings.length != 2){
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "You cant blacklist air"));
                     return true;
                 }
-                Material material = p.getInventory().getItemInMainHand().getType();
+
+                Material material;
+                if(strings.length == 1){
+                    material = p.getInventory().getItemInMainHand().getType();
+                }else{
+                    material = Material.matchMaterial(strings[1].toUpperCase());
+                    if(material == null){
+                        p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No item found!"));
+                        return true;
+                    }
+                }
                 ItemStack item = new ItemStack(material);
                 item.setLore(p.getInventory().getItemInMainHand().getLore());
 
@@ -65,7 +75,16 @@ public class Blacklist implements CommandExecutor {
                     p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No permission to change blacklist, do /blacklist list to view blacklisted items"));
                     return true;
                 }
-                Material material = p.getInventory().getItemInMainHand().getType();
+                Material material;
+                if(strings.length == 1){
+                    material = p.getInventory().getItemInMainHand().getType();
+                }else{
+                    material = Material.matchMaterial(strings[1].toUpperCase());
+                    if(material == null){
+                        p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().get("prefix") + "No item found!"));
+                        return true;
+                    }
+                }
                 ItemStack item = new ItemStack(material);
                 item.setLore(p.getInventory().getItemInMainHand().getLore());
 

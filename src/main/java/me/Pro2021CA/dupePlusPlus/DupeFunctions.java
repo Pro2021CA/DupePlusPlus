@@ -85,6 +85,25 @@ public class DupeFunctions {
         return false;
     }
 
+    public static boolean dupeBlacklist(BundleMeta meta){
+        for(ItemStack itemStack : meta.getItems()){
+            if(isBundle(itemStack)){
+                if(dupeBlacklist((BundleMeta) itemStack.getItemMeta())){
+                    return true;
+                }
+            }
+            if(isBlacklisted(itemStack)){
+                return true;
+            }
+            if(hasPDC(itemStack)){
+                return true;
+            }
+            if(hasEnchants(itemStack)){
+                return true;
+            }
+        }
+        return false;
+    }
     public static boolean isBundle(ItemStack itemStack){
         return itemStack.getItemMeta() instanceof BundleMeta;
     }
