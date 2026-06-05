@@ -1,19 +1,13 @@
 package me.Pro2021CA.dupePlusPlus;
 
 import org.bstats.bukkit.Metrics;
-import org.bstats.charts.MultiLineChart;
-import org.bstats.charts.SingleLineChart;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklistedenchants;
 import static me.Pro2021CA.dupePlusPlus.Blacklist.blacklisteditems;
