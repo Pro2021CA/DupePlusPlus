@@ -32,6 +32,9 @@ public class DupeFunctions {
     // function to check all other smaller blacklist functions at once
     // check entire blacklist, works with bundles and with shulkers
     public static boolean blacklisted(ItemStack item){
+        if(item == null){
+            return false;
+        }
         if(isInsideBlacklist(item)){
             return true;
         }

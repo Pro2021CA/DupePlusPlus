@@ -33,7 +33,7 @@ public class DupeCommand implements CommandExecutor {
             }
 
             // make sure player is holding something
-            if (p.getInventory().getItemInMainHand() == null || p.getInventory().getItemInMainHand().getType() == Material.AIR){
+            if (p.getInventory().getItemInMainHand().getType() == Material.AIR){
                 p.sendMessage(MiniMessage.miniMessage().deserialize(DupePlusPlus.plugin.getConfig().getString("prefix") + "You can't dupe air, duh"));
                 return true;
             }
