@@ -36,6 +36,7 @@ maxdupe: 1 # default max dupe
 permissionmaxdupe: 25 # the max number checked when checking for permissions to dupe more than the default max dupe
 inventoryfullmessage: true # whether the inventory full message should be send
 cooldown: 0 # cooldown between dupes (in seconds)
+allowheads: true # when set to false block all player heads from being duped
 
 
 

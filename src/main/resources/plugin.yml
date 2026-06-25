@@ -1,7 +1,8 @@
 name: DupePlusPlus
-version: '4.3-SNAPSHOT'
+version: '4.5-SNAPSHOT'
 main: me.Pro2021CA.dupePlusPlus.DupePlusPlus
 api-version: '1.21'
+description: Adds the /dupe command to your server.
 author: Pro2021CA
 commands:
   dupeconfig:

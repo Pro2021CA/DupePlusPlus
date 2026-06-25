@@ -44,6 +44,9 @@ public class DupeFunctions {
         if(hasEnchants(item)){
             return true;
         }
+        if(headBlacklist(item)){
+            return true;
+        }
         if(isBundle(item)){
             if(bundleBlacklist((BundleMeta) item.getItemMeta())){
                 return true;
@@ -58,7 +61,12 @@ public class DupeFunctions {
         return false;
     }
 
-    // individual blacklist checks
+    public static boolean headBlacklist(ItemStack item){
+        if(item.getType().equals(Material.PLAYER_HEAD) && !DupePlusPlus.plugin.getConfig().getBoolean("allowheads")){
+            return true;
+        }
+        return false;
+    }
 
     // check the default blacklist
     public static boolean isInsideBlacklist(ItemStack item){
